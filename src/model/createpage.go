@@ -6,7 +6,10 @@
 
 package model
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"simple_add_page/src/util"
+)
 
 func UnmarshalCreatePage(data []byte) (CreatePage, error) {
 	var r CreatePage
@@ -16,6 +19,22 @@ func UnmarshalCreatePage(data []byte) (CreatePage, error) {
 
 func (r *CreatePage) Marshal() ([]byte, error) {
 	return json.Marshal(r)
+}
+
+func New(content_title string, multi_select_name string) (c *CreatePage) {
+	multi_select := MultiSelect{Name: multi_select_name}
+	multi_select_arr := [...]MultiSelect{multi_select}
+	tag := Tag{ID: "%5D%3EHZ", Type: util.TYPE_MULTI_SELECT, MultiSelect: multi_select_arr[:]}
+
+	text := Text{Content: content_title}
+	title := [...]Title{Title{Type: "text", Text: text}}
+	photo_id := PhotoID{ID: "title", Type: "title", Title: title[:]}
+
+	propaties := Properties{PhotoID: photo_id, Tag: tag}
+	parent := Parent{DatabaseID: util.DATABASE_ID}
+
+	return &CreatePage{Parent: parent, Properties: propaties}
+
 }
 
 type CreatePage struct {
@@ -28,21 +47,11 @@ type Parent struct {
 }
 
 type Properties struct {
-	写真の番号 写真の番号 `json:"写真の番号"`
-	タグ    タグ    `json:"タグ"`
+	PhotoID PhotoID `json:"photo_id"`
+	Tag     Tag     `json:"tag"`
 }
 
-type タグ struct {
-	ID          string        `json:"id"`
-	Type        string        `json:"type"`
-	MultiSelect []MultiSelect `json:"multi_select"`
-}
-
-type MultiSelect struct {
-	Name string `json:"name"`
-}
-
-type 写真の番号 struct {
+type PhotoID struct {
 	ID    string  `json:"id"`
 	Type  string  `json:"type"`
 	Title []Title `json:"title"`
@@ -55,4 +64,14 @@ type Title struct {
 
 type Text struct {
 	Content string `json:"content"`
+}
+
+type Tag struct {
+	ID          string        `json:"id"`
+	Type        string        `json:"type"`
+	MultiSelect []MultiSelect `json:"multi_select"`
+}
+
+type MultiSelect struct {
+	Name string `json:"name"`
 }
