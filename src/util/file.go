@@ -34,6 +34,18 @@ func ReadConfigFile(config_file_path string) *Config {
 	return &conf
 }
 
+func ReadPhotoIdFile(file_path string) *os.File {
+	if file_path == "" {
+		file_path = "../input_file/photo_list.txt"
+	}
+	f, err := os.Open(file_path)
+	if err != nil {
+		log.Fatalln("can't read photo id list.", err)
+	}
+	defer f.Close()
+	return f
+}
+
 func GetPrjDir() string {
 	return "../"
 }
