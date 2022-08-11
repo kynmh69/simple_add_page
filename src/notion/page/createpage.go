@@ -1,4 +1,4 @@
-package createpage
+package page
 
 import (
 	"log"
