@@ -1,14 +1,21 @@
 package database
 
 import (
+	"log"
+	modeldatabase "simple_add_page/src/model/model_database"
 	"simple_add_page/src/util"
 )
 
-func Retrieve() []byte {
-
-	url := "https://api.notion.com/v1/databases/database_id"
+func Retrieve() *modeldatabase.Database {
+	config := util.ReadConfigFile("")
+	url := "https://api.notion.com/v1/databases/" + config.ApiSettings.DatabaseID
 
 	body := util.GetRequest(url)
+	database_struct, err := modeldatabase.UnmarshalDatabase(body)
 
-	return body
+	if err != nil {
+		log.Fatalln("Can't unmarshal database.")
+	}
+
+	return &database_struct
 }

@@ -1,10 +1,9 @@
 // This file was generated from JSON Schema using quicktype, do not modify it directly.
 // To parse and unparse this JSON data, add this code to your project and do:
 //
-//    createPage, err := UnmarshalCreatePage(bytes)
-//    bytes, err = createPage.Marshal()
-
-package model
+//	createPage, err := UnmarshalCreatePage(bytes)
+//	bytes, err = createPage.Marshal()
+package modelpage
 
 import (
 	"encoding/json"

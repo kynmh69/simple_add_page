@@ -20,9 +20,6 @@ func createPage() {
 	id_list := util.SplitLines(*content)
 
 	tag_name := "hiroki"
-	if len(id_list) < 1 {
-		return
-	}
 
 	for _, v := range id_list {
 		page.Create(v, tag_name)
@@ -35,5 +32,6 @@ func retrieveDatabase() {
 
 	body := database.Retrieve()
 
-	logger.Println(string(body))
+	logger.Println("database:", body)
+	logger.Println("title:", body.Title[0].Text.Content)
 }
