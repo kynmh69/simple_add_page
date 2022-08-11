@@ -1,7 +1,6 @@
 package util
 
 import (
-	"io/ioutil"
 	"log"
 	"os"
 
@@ -9,16 +8,16 @@ import (
 )
 
 func ReadConfigFile(config_file_path string) *Config {
-	logger := log.Default()
+	// logger := log.Default()
 
 	if config_file_path == "" {
 		config_file_path = "../config/api.yml"
 	}
 
-	dir, _ := ioutil.ReadDir("../")
-	for i := 0; i < len(dir); i++ {
-		logger.Println("file path: ", dir[i].Name())
-	}
+	// dir, _ := ioutil.ReadDir("../")
+	// for i := 0; i < len(dir); i++ {
+	// 	logger.Println("file path: ", dir[i].Name())
+	// }
 
 	f, err := os.Open(config_file_path)
 
