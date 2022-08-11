@@ -5,5 +5,7 @@ import (
 )
 
 func main() {
-	page.Create("test1", "hiroki")
+	tag_name := "hiroki"
+
+	page.Create("test1", tag_name)
 }

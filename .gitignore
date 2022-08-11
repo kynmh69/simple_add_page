@@ -15,3 +15,5 @@
 # vendor/
 
 api.yml
+
+input_file/photo_list.txt
