@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -11,6 +10,8 @@ import (
 )
 
 func main() {
+
+	logger := log.Default()
 
 	url := "https://api.notion.com/v1/pages"
 
@@ -40,8 +41,8 @@ func main() {
 
 	body, _ := ioutil.ReadAll(res.Body)
 
-	fmt.Println(res)
-	fmt.Println(string(body))
+	logger.Println(res)
+	logger.Println(string(body))
 
 }
 
