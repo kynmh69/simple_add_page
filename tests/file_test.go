@@ -18,7 +18,7 @@ func TestReadConfigFile(t *testing.T) {
 		// TODO: Add test cases.
 		{
 			name: "normal",
-			args: args{config_file_path: "config/temp_api_yml"},
+			args: args{config_file_path: "/Users/Hiroki/Applications/GoProjects/simple_add_page/config/temp_api.yml"},
 			want: &util.Config{ApiSettings: util.ApiSettings{ApiSecret: "", DatabaseID: "", TagId: ""}},
 		},
 	}

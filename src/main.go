@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"simple_add_page/src/model"
+	"simple_add_page/src/util"
 )
 
 func main() {
@@ -22,9 +23,11 @@ func main() {
 
 	req, _ := http.NewRequest("POST", url, bytes.NewBuffer(json_payload))
 
+	token := getToken()
+
 	req.Header.Add("Accept", "application/json")
 	req.Header.Add("Content-Type", "application/json")
-	req.Header.Add("Authorization", "Bearer secret_8huHwdrEnHB6MNzU5BJ1peF4KyqvFhUPKUAfvg8205p")
+	req.Header.Add("Authorization", token)
 	req.Header.Add("Notion-Version", "2022-06-28")
 
 	res, err := http.DefaultClient.Do(req)
@@ -40,4 +43,11 @@ func main() {
 	fmt.Println(res)
 	fmt.Println(string(body))
 
+}
+
+func getToken() string {
+	conf := util.ReadConfigFile("")
+	token := "Bearer "
+	token += conf.ApiSettings.ApiSecret
+	return token
 }
