@@ -27,8 +27,10 @@ func New(content_title string, multi_select_name string) (c *CreatePage) {
 	tag := Tag{ID: "%5D%3EHZ", Type: util.TYPE_MULTI_SELECT, MultiSelect: multi_select_arr[:]}
 
 	text := Text{Content: content_title}
-	title := [...]Title{Title{Type: "text", Text: text}}
-	photo_id := PhotoID{ID: "title", Type: "title", Title: title[:]}
+
+	title := Title{Type: "text", Text: text}
+	title_arr := [...]Title{title}
+	photo_id := PhotoID{ID: "title", Type: "title", Title: title_arr[:]}
 
 	propaties := Properties{PhotoID: photo_id, Tag: tag}
 	parent := Parent{DatabaseID: util.DATABASE_ID}
