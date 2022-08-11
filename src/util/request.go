@@ -16,7 +16,24 @@ func makeHeader(req http.Request) {
 }
 
 func PostRequest(url string, payload []byte) []byte {
-	req, _ := http.NewRequest("POST", url, bytes.NewBuffer(payload))
+	req, _ := http.NewRequest(http.MethodPost, url, bytes.NewBuffer(payload))
+
+	makeHeader(*req)
+
+	res, err := http.DefaultClient.Do(req)
+
+	if err != nil {
+		log.Fatalln("Request has error.")
+	}
+
+	defer res.Body.Close()
+
+	body, _ := io.ReadAll(res.Body)
+	return body
+}
+
+func GetRequest(url string) []byte {
+	req, _ := http.NewRequest(http.MethodGet, url, nil)
 
 	makeHeader(*req)
 
