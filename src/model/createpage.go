@@ -22,9 +22,11 @@ func (r *CreatePage) Marshal() ([]byte, error) {
 }
 
 func New(content_title string, multi_select_name string) (c *CreatePage) {
+	conf := util.ReadConfigFile("")
+
 	multi_select := MultiSelect{Name: multi_select_name}
 	multi_select_arr := [...]MultiSelect{multi_select}
-	tag := Tag{ID: "%5D%3EHZ", Type: util.TYPE_MULTI_SELECT, MultiSelect: multi_select_arr[:]}
+	tag := Tag{ID: conf.ApiSettings.TagId, Type: util.TYPE_MULTI_SELECT, MultiSelect: multi_select_arr[:]}
 
 	text := Text{Content: content_title}
 
@@ -33,7 +35,7 @@ func New(content_title string, multi_select_name string) (c *CreatePage) {
 	photo_id := PhotoID{ID: "title", Type: "title", Title: title_arr[:]}
 
 	propaties := Properties{PhotoID: photo_id, Tag: tag}
-	parent := Parent{DatabaseID: util.DATABASE_ID}
+	parent := Parent{DatabaseID: conf.ApiSettings.DatabaseID}
 
 	return &CreatePage{Parent: parent, Properties: propaties}
 
