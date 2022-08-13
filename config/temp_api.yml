@@ -1,4 +1,4 @@
-api_setting:
+api_settings:
   api_secret: ''
   database_id: ''
   tag_id: ''

@@ -11,6 +11,7 @@ func Retrieve() *modeldatabase.Database {
 	url := "https://api.notion.com/v1/databases/" + config.ApiSettings.DatabaseID
 
 	body := util.GetRequest(url)
+	log.Default().Println(string(body))
 	database_struct, err := modeldatabase.UnmarshalDatabase(body)
 
 	if err != nil {
