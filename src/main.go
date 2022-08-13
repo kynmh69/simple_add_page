@@ -16,8 +16,7 @@ func main() {
 func createPage() {
 	logger := log.Default()
 
-	content := util.ReadPhotoIdFile("")
-	id_list := util.SplitLines(*content)
+	id_list := util.ReadLines("")
 
 	tag_name := "hiroki"
 
