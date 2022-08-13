@@ -33,5 +33,8 @@ func retrieveDatabase() {
 	body := database.Retrieve()
 
 	logger.Println("database:", body)
+	if body.Object == "error" {
+		logger.Fatalln("Response error.", body)
+	}
 	logger.Println("title:", body.Title[0].Text.Content)
 }
